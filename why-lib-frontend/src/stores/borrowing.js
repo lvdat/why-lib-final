@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import borrowingService from '@/services/borrowingService'
 import { useToast } from 'vue-toastification'
-
+import { useAuthStore } from './auth'
 export const useBorrowingStore = defineStore('borrowing', {
     state: () => ({
         borrowRequests: [],
@@ -9,8 +9,9 @@ export const useBorrowingStore = defineStore('borrowing', {
         loading: false
     }),
     actions: {
-        async borrowBook(bookId, token) {
+        async borrowBook(bookId) {
             try {
+                const { token } = useAuthStore()
                 this.loading = true
                 const response = await borrowingService.borrowBook(bookId, token)
                 return response
@@ -20,9 +21,10 @@ export const useBorrowingStore = defineStore('borrowing', {
                 this.loading = false
             }
         },
-        async fetchBorrowRequests(token) {
+        async fetchBorrowRequests() {
             try {
                 this.loading = true
+                const { token } = useAuthStore()
                 const response = await borrowingService.getBorrowRequests(token)
                 this.borrowRequests = response.muonSachs
                 return response
@@ -32,9 +34,10 @@ export const useBorrowingStore = defineStore('borrowing', {
                 this.loading = false
             }
         },
-        async getMyBorrowings(userId, token) {
+        async getMyBorrowings(userId) {
             try {
                 this.loading = true
+                const { token } = useAuthStore()
                 const response = await borrowingService.getMyBorrowings(userId, token)
                 this.myBorrowings = response.muonSachs
                 return response
@@ -44,9 +47,10 @@ export const useBorrowingStore = defineStore('borrowing', {
                 this.loading = false
             }
         },
-        async approveBorrowRequest(requestId, status, token) {
+        async approveBorrowRequest(requestId, status) {
             try {
                 this.loading = true
+                const { token } = useAuthStore()
                 const response = await borrowingService.approveBorrowRequest(
                     requestId,
                     status,
@@ -66,9 +70,10 @@ export const useBorrowingStore = defineStore('borrowing', {
                 this.loading = false
             }
         },
-        async returnBook(requestId, token) {
+        async returnBook(requestId) {
             try {
                 this.loading = true
+                const { token } = useAuthStore()
                 const response = await borrowingService.returnBook(requestId, token)
 
                 // Update the request in state

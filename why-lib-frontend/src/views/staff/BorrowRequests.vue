@@ -101,10 +101,11 @@ const loading = ref(false)
 const fetchRequests = async () => {
     try {
         loading.value = true
-        await borrowingStore.getBorrowRequests(authStore.token)
+        await borrowingStore.fetchBorrowRequests(authStore.token)
         borrowRequests.value = borrowingStore.borrowRequests
     } catch (error) {
         toast.error('Lỗi khi tải yêu cầu mượn sách')
+        console.log(error)
     } finally {
         loading.value = false
     }
