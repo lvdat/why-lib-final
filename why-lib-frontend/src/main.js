@@ -6,6 +6,7 @@ import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
 // Import Tailwind CSS
+// import './index.css'
 import './assets/main.css'
 
 const app = createApp(App)

@@ -15,14 +15,3 @@ onMounted(() => {
     }
 })
 </script>
-
-<style>
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-/* Custom styles */
-.router-link-exact-active {
-    @apply text-primary-600 font-medium;
-}
-</style>
