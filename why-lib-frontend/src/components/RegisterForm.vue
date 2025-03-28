@@ -2,31 +2,7 @@
     <form @submit.prevent="handleSubmit" class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label for="maDocGia" class="block text-sm font-medium text-gray-700"
-                    >Mã độc giả</label
-                >
-                <input
-                    id="maDocGia"
-                    v-model="form.MADOCGIA"
-                    type="text"
-                    required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                />
-            </div>
-
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                />
-            </div>
-
-            <div>
-                <label for="hoLot" class="block text-sm font-medium text-gray-700">Họ lót</label>
+                <label for="hoLot" class="block text-sm font-medium text-gray-700">Họ</label>
                 <input
                     id="hoLot"
                     v-model="form.HOLOT"
@@ -46,7 +22,16 @@
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                 />
             </div>
-
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                    required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                />
+            </div>
             <div>
                 <label for="ngaySinh" class="block text-sm font-medium text-gray-700"
                     >Ngày sinh</label

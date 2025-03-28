@@ -21,7 +21,7 @@
                     Danh sách sách
                 </router-link>
                 <router-link
-                    v-if="authStore.isAuthenticated && authStore.user.role === 'docgia'"
+                    v-if="authStore.isAuthenticated && userRole === 'docgia'"
                     to="/my-borrowings"
                     class="text-gray-600 hover:text-primary-600 transition-colors"
                     active-class="text-primary-600 font-medium"
@@ -31,7 +31,7 @@
                 <router-link
                     v-if="
                         authStore.isAuthenticated &&
-                        (authStore.user.role === 'nhanvien' || authStore.user.role === 'quantri')
+                        (userRole === 'nhanvien' || userRole === 'quantri')
                     "
                     to="/borrow-requests"
                     class="text-gray-600 hover:text-primary-600 transition-colors"
@@ -40,7 +40,7 @@
                     Yêu cầu mượn sách
                 </router-link>
                 <router-link
-                    v-if="authStore.isAuthenticated && authStore.user.role === 'quantri'"
+                    v-if="authStore.isAuthenticated && userRole === 'quantri'"
                     to="/admin/books"
                     class="text-gray-600 hover:text-primary-600 transition-colors"
                     active-class="text-primary-600 font-medium"
@@ -67,7 +67,7 @@
                 <template v-else>
                     <div class="relative group">
                         <button class="flex items-center space-x-2 focus:outline-none">
-                            <span class="font-medium">{{ authStore.user.name }}</span>
+                            <span class="font-medium">{{ userName }}</span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="h-5 w-5 text-gray-500"
@@ -108,10 +108,14 @@
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
+import { computed } from 'vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
 const toast = useToast()
+
+const userRole = computed(() => authStore.user?.role || null)
+const userName = computed(() => (authStore.user?.HOLOT + ' ' + authStore.user?.TEN) || null)
 
 const logout = async () => {
     try {

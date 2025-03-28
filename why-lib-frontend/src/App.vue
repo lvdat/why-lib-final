@@ -8,10 +8,14 @@ import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
 
-onMounted(() => {
+onMounted(async () => {
     // Check authentication status when app loads
     if (authStore.token) {
-        authStore.getMe()
+      try {
+      await authStore.getMe();
+    } catch (error) {
+      authStore.logout();
+    }
     }
 })
 </script>
