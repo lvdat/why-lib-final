@@ -84,23 +84,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useBorrowingStore } from '@/stores/borrowing'
 import { useAuthStore } from '@/stores/auth'
+import { useToast } from 'vue-toastification'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 
 const borrowingStore = useBorrowingStore()
+const toast = useToast()
 const authStore = useAuthStore()
 const borrowings = ref([])
 const loading = ref(false)
 
+// Sử dụng computed để lấy userId
+const userId = computed(() => authStore.user?._id);
+
 const fetchBorrowings = async () => {
+    if (!userId.value) {
+      toast.error('Vui lòng đăng nhập để xem sách đang mượn');
+      return;
+    }
+
     try {
         loading.value = true
-        await borrowingStore.getMyBorrowings(authStore.user.id, authStore.token)
+        await borrowingStore.getMyBorrowings(userId.value, authStore.token)
         borrowings.value = borrowingStore.myBorrowings
     } catch (error) {
+        toast.error(error.message || 'Lỗi khi tải danh sách mượn sách');
         console.error(error)
     } finally {
         loading.value = false
