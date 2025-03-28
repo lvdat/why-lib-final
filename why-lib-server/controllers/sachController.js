@@ -123,6 +123,8 @@ exports.deleteSach = async (req, res) => {
         }
 
         const sach = await Sach.findByIdAndDelete(req.params.id)
+        // xoa sach trong danh sach muon
+        await MuonSach.deleteMany({ MASACH: req.params.id })
         if (!sach) {
             return res
                 .status(404)

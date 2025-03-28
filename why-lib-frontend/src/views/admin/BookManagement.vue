@@ -326,7 +326,7 @@ const submitForm = async () => {
         closeModal()
         fetchData()
     } catch (error) {
-        toast.error(error.message || 'Có lỗi xảy ra')
+        toast.error(error || 'Có lỗi xảy ra')
     }
 }
 
@@ -337,7 +337,7 @@ const deleteBook = async () => {
         showDeleteModal.value = false
         fetchData()
     } catch (error) {
-        toast.error(error.message || 'Có lỗi xảy ra')
+        toast.error(error || 'Có lỗi xảy ra')
     }
 }
 

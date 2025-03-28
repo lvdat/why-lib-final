@@ -117,7 +117,7 @@ const approveRequest = async (id, status) => {
         toast.success(`Đã ${status === 'Đã duyệt' ? 'duyệt' : 'từ chối'} yêu cầu mượn sách`)
         fetchRequests()
     } catch (error) {
-        toast.error(error.message || 'Lỗi khi xử lý yêu cầu')
+        toast.error(error || 'Lỗi khi xử lý yêu cầu')
     }
 }
 
@@ -127,7 +127,7 @@ const returnBook = async (id) => {
         toast.success('Đã xác nhận trả sách thành công')
         fetchRequests()
     } catch (error) {
-        toast.error(error.message || 'Lỗi khi xác nhận trả sách')
+        toast.error(error || 'Lỗi khi xác nhận trả sách')
     }
 }
 
