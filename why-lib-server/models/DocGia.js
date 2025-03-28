@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const DocGiaSchema = new mongoose.Schema({
-  MADOCGIA: { type: String, required: true, unique: true },
+  MADOCGIA: { 
+    type: String,
+    default: () => `DG-${uuidv4().substring(0, 8)}`, // Tự động sinh mã DG- + 8 ký tự ngẫu nhiên
+    unique: true,
+    required: true
+  },
   HOLOT: { type: String, required: true },
   TEN: { type: String, required: true },
   NGAYSINH: { type: Date, required: true },
