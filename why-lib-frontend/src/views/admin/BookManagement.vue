@@ -257,16 +257,18 @@ const fetchData = async () => {
     try {
         loading.value = true
         await bookStore.fetchBooks()
+        await bookStore.fetchPublishers()
         books.value = bookStore.books
 
-        // Extract publishers from books
-        const uniquePublishers = {}
-        books.value.forEach((book) => {
-            if (book.MANXB && !uniquePublishers[book.MANXB._id]) {
-                uniquePublishers[book.MANXB._id] = book.MANXB
-            }
-        })
-        publishers.value = Object.values(uniquePublishers)
+        // // Extract publishers from books
+        // const uniquePublishers = {}
+        // books.value.forEach((book) => {
+        //     if (book.MANXB && !uniquePublishers[book.MANXB._id]) {
+        //         uniquePublishers[book.MANXB._id] = book.MANXB
+        //     }
+        // })
+        // publishers.value = Object.values(uniquePublishers)
+        publishers.value = bookStore.publishers
     } catch (error) {
         toast.error('Lỗi khi tải dữ liệu sách')
     } finally {

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import bookService from '@/services/bookService'
 import { useToast } from 'vue-toastification'
+import nxbService from '@/services/nxbService'
 
 export const useBookStore = defineStore('books', {
     state: () => ({
@@ -9,6 +10,17 @@ export const useBookStore = defineStore('books', {
         loading: false
     }),
     actions: {
+        async fetchPublishers() {
+            try {
+                this.loading = true
+                this.publishers = await nxbService.getAllNhaXuatBan()
+            } catch (error) {
+                const toast = useToast()
+                toast.error('Lỗi khi tải danh sách nhà xuất bản')
+            } finally {
+                this.loading = false
+            }
+        },
         async fetchBooks() {
             try {
                 this.loading = true
