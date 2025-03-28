@@ -1,5 +1,6 @@
 const Sach = require('../models/Sach')
 const NhaXuatBan = require('../models/NhaXuatBan')
+const MuonSach = require('../models/MuonSach')
 
 // Tạo sách mới
 exports.createSach = async (req, res) => {
@@ -129,7 +130,7 @@ exports.deleteSach = async (req, res) => {
         }
         res.json({ success: true, message: 'Đã xóa sách thành công' })
     } catch (err) {
-        console.error(err.message)
+        console.error(err)
         res.status(500).json({ success: false, message: 'Lỗi server' })
     }
 }
