@@ -55,7 +55,8 @@ const borrowBook = async () => {
         toast.success('Đã gửi yêu cầu mượn sách thành công!')
         emit('borrowed')
     } catch (error) {
-        toast.error(error.message || 'Có lỗi khi gửi yêu cầu mượn sách')
+      console.log(error)
+        toast.error(error || 'Có lỗi khi gửi yêu cầu mượn sách')
     }
 }
 </script>
