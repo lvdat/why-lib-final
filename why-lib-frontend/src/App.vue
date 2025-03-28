@@ -1,19 +1,19 @@
 <template>
-  <router-view />
+    <router-view />
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { useAuthStore } from '@/stores/auth';
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 onMounted(() => {
-  // Check authentication status when app loads
-  if (authStore.token) {
-    authStore.getMe();
-  }
-});
+    // Check authentication status when app loads
+    if (authStore.token) {
+        authStore.getMe()
+    }
+})
 </script>
 
 <style>
@@ -23,6 +23,6 @@ onMounted(() => {
 
 /* Custom styles */
 .router-link-exact-active {
-  @apply text-primary-600 font-medium;
+    @apply text-primary-600 font-medium;
 }
 </style>
