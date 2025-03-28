@@ -57,17 +57,8 @@ exports.login = async (req, res) => {
 
 // Đăng ký đọc giả
 exports.registerDocGia = async (req, res) => {
-    const {
-        MADOCGIA,
-        HOLOT,
-        TEN,
-        NGAYSINH,
-        PHAI,
-        DIACHI,
-        DIENTHOAI,
-        email,
-        password
-    } = req.body
+    const { HOLOT, TEN, NGAYSINH, PHAI, DIACHI, DIENTHOAI, email, password } =
+        req.body
 
     try {
         // Kiểm tra email tồn tại
@@ -80,7 +71,6 @@ exports.registerDocGia = async (req, res) => {
 
         // Tạo đọc giả mới
         user = new DocGia({
-            MADOCGIA,
             HOLOT,
             TEN,
             NGAYSINH,
@@ -97,6 +87,7 @@ exports.registerDocGia = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                madocgia: user.MADOCGIA,
                 role: 'docgia',
                 name: `${user.HOLOT} ${user.TEN}`
             }

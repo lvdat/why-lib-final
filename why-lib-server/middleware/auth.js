@@ -8,12 +8,10 @@ module.exports = async (req, res, next) => {
 
     // Kiểm tra nếu không có token
     if (!token) {
-        return res
-            .status(401)
-            .json({
-                success: false,
-                message: 'Không có token, truy cập bị từ chối'
-            })
+        return res.status(401).json({
+            success: false,
+            message: 'Không có token, truy cập bị từ chối'
+        })
     }
 
     try {

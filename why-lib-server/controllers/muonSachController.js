@@ -16,12 +16,10 @@ exports.taoYeuCauMuon = async (req, res) => {
         }
 
         if (sach.SOQUYEN <= 0) {
-            return res
-                .status(400)
-                .json({
-                    success: false,
-                    message: 'Sách đã hết, không thể mượn'
-                })
+            return res.status(400).json({
+                success: false,
+                message: 'Sách đã hết, không thể mượn'
+            })
         }
 
         // Kiểm tra đọc giả đã mượn sách này chưa
@@ -61,23 +59,19 @@ exports.duyetMuonSach = async (req, res) => {
     try {
         const muonSach = await MuonSach.findById(id).populate('MASACH')
         if (!muonSach) {
-            return res
-                .status(404)
-                .json({
-                    success: false,
-                    message: 'Không tìm thấy yêu cầu mượn sách'
-                })
+            return res.status(404).json({
+                success: false,
+                message: 'Không tìm thấy yêu cầu mượn sách'
+            })
         }
 
         if (trangThai === 'Đã duyệt') {
             // Giảm số lượng sách
             if (muonSach.MASACH.SOQUYEN <= 0) {
-                return res
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: 'Sách đã hết, không thể duyệt'
-                    })
+                return res.status(400).json({
+                    success: false,
+                    message: 'Sách đã hết, không thể duyệt'
+                })
             }
             muonSach.MASACH.SOQUYEN -= 1
             await muonSach.MASACH.save()
@@ -102,21 +96,17 @@ exports.xacNhanTraSach = async (req, res) => {
     try {
         const muonSach = await MuonSach.findById(id).populate('MASACH')
         if (!muonSach) {
-            return res
-                .status(404)
-                .json({
-                    success: false,
-                    message: 'Không tìm thấy yêu cầu mượn sách'
-                })
+            return res.status(404).json({
+                success: false,
+                message: 'Không tìm thấy yêu cầu mượn sách'
+            })
         }
 
         if (muonSach.TRANGTHAI !== 'Đã duyệt') {
-            return res
-                .status(400)
-                .json({
-                    success: false,
-                    message: 'Chỉ có thể trả sách đã được duyệt'
-                })
+            return res.status(400).json({
+                success: false,
+                message: 'Chỉ có thể trả sách đã được duyệt'
+            })
         }
 
         // Tăng số lượng sách

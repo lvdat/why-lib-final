@@ -1,5 +1,50 @@
 const DocGia = require('../models/DocGia')
 
+exports.createDocGia = async (req, res) => {
+    try {
+        const {
+            HOLOT,
+            TEN,
+            NGAYSINH,
+            PHAI,
+            DIACHI,
+            DIENTHOAI,
+            email,
+            password
+        } = req.body
+
+        // Mã đọc giả sẽ được tự động sinh bởi Mongoose model
+        const newDocGia = new DocGia({
+            HOLOT,
+            TEN,
+            NGAYSINH,
+            PHAI,
+            DIACHI,
+            DIENTHOAI,
+            email,
+            password
+        })
+
+        const savedDocGia = await newDocGia.save()
+        res.status(201).json({
+            success: true,
+            docGia: savedDocGia
+        })
+    } catch (err) {
+        if (err.code === 11000) {
+            // Xử lý trường hợp trùng email
+            return res.status(400).json({
+                success: false,
+                message: 'Email đã tồn tại'
+            })
+        }
+        res.status(500).json({
+            success: false,
+            message: err.message
+        })
+    }
+}
+
 // Lấy tất cả đọc giả
 exports.getAllDocGia = async (req, res) => {
     try {
