@@ -115,7 +115,7 @@ const router = useRouter()
 const toast = useToast()
 
 const userRole = computed(() => authStore.user?.role || null)
-const userName = computed(() => (authStore.user?.HOLOT + ' ' + authStore.user?.TEN) || null)
+const userName = computed(() => userRole.value === 'docgia' ? (authStore.user?.HOLOT + ' ' + authStore.user?.TEN) : authStore.user?.HOTENNV || null)
 
 const logout = async () => {
     try {
