@@ -122,9 +122,9 @@ exports.getMe = async (req, res) => {
         } else {
             user = await NhanVien.findById(req.user.id).select('-password')
         }
-        role = req.user.role
-        newJS = {user, role}
-        res.json({ success: true, ...newJS})
+        newJS = user.toObject()
+        newJS.role = req.user.role
+        res.json({ success: true, user: newJS})
     } catch (err) {
         console.error(err.message)
         res.status(500).json({ success: false, message: 'Lỗi server' })
