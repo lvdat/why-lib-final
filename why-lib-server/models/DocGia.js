@@ -17,7 +17,8 @@ const DocGiaSchema = new mongoose.Schema(
         DIACHI: { type: String, required: true },
         DIENTHOAI: { type: String, required: true },
         email: { type: String, required: true, unique: true },
-        password: { type: String, required: true }
+        password: { type: String, required: true },
+        role: { type: String, default: 'docgia', required: true },
     },
     { timestamps: true }
 )
