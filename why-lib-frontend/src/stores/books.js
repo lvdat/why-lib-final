@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import bookService from '@/services/bookService'
 import { useToast } from 'vue-toastification'
 import nxbService from '@/services/nxbService'
+import { useAuthStore } from './auth'
 
 export const useBookStore = defineStore('books', {
     state: () => ({
@@ -44,7 +45,8 @@ export const useBookStore = defineStore('books', {
         },
         async createBook(bookData) {
             try {
-                const response = await bookService.createBook(bookData, this.token)
+              const { token } = useAuthStore()
+                const response = await bookService.createBook(bookData, token)
                 this.books.push(response.sach)
                 return response
             } catch (error) {
@@ -53,7 +55,8 @@ export const useBookStore = defineStore('books', {
         },
         async updateBook(id, bookData) {
             try {
-                const response = await bookService.updateBook(id, bookData, this.token)
+              const { token } = useAuthStore()
+                const response = await bookService.updateBook(id, bookData, token)
                 const index = this.books.findIndex((b) => b._id === id)
                 if (index !== -1) {
                     this.books[index] = response.sach
@@ -65,7 +68,8 @@ export const useBookStore = defineStore('books', {
         },
         async deleteBook(id) {
             try {
-                await bookService.deleteBook(id, this.token)
+              const { token } = useAuthStore()
+                await bookService.deleteBook(id, token)
                 this.books = this.books.filter((b) => b._id !== id)
             } catch (error) {
                 throw error.response?.data?.message || 'Xóa sách thất bại'
