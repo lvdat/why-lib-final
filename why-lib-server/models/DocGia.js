@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid')
 
 const DocGiaSchema = new mongoose.Schema(
     {
@@ -18,7 +18,7 @@ const DocGiaSchema = new mongoose.Schema(
         DIENTHOAI: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        role: { type: String, default: 'docgia', required: true },
+        role: { type: String, default: 'docgia', required: true }
     },
     { timestamps: true }
 )
