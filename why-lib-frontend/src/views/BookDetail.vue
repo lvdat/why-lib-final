@@ -144,7 +144,7 @@ const borrowBook = async () => {
         toast.success('Đã gửi yêu cầu mượn sách thành công!')
         fetchBook() // Refresh book data
     } catch (error) {
-        toast.error(error.message || 'Có lỗi khi gửi yêu cầu mượn sách')
+        toast.error(error || 'Có lỗi khi gửi yêu cầu mượn sách')
     }
 }
 
